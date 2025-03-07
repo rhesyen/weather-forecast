@@ -12,6 +12,7 @@
   "dependencies": {
     "@eslint/eslintrc": "^3.2.0",
     "@nx/eslint-plugin": "^20.4.0",
+    "axios": "^1.8.2",
     "next": "15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
