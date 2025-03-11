@@ -23,6 +23,18 @@ const Weather = () => {
 
   console.log(weatherData);
 
-  return <div className="weather">Pogoda</div>;
+  return (
+    <div className="weather">
+      <div className="weather-container">
+        {weatherData.map((weatherItem: any) => {
+          return (
+            <div className="weather-item" key={weatherItem.id_stacji}>
+              <h2>{weatherItem.stacja}</h2>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 };
 export default Weather;
