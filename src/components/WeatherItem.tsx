@@ -1,13 +1,21 @@
-const WeatherItem = (props: any) => {
+interface WeatherItemProps {
+  id_stacji: string;
+  stacja: string;
+  temperatura: string;
+  cisnienie: string;
+}
+
+const WeatherItem = ({
+  id_stacji,
+  stacja,
+  temperatura,
+  cisnienie,
+}: WeatherItemProps) => {
   return (
-    <div className="weather-item">
-      {" "}
-      //kluczowanie key odbywa się tam gdzie mapowanie
-      <h2>{props.stacja}</h2>
-      <p>Temperatura: {props.temperatura} st. C</p>
-      <p>
-        Ciśnienie: {props.cisnienie ? props.cisnienie + " hPa" : "brak danych"}{" "}
-      </p>
+    <div key={id_stacji} className="weather-item">
+      <h2>{stacja}</h2>
+      <p>Temperatura: {temperatura} st. C</p>
+      <p>Ciśnienie: {cisnienie ? cisnienie + " hPa" : "brak danych"} </p>
     </div>
   );
 };
