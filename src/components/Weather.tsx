@@ -30,6 +30,8 @@ const Weather = () => {
           return (
             <div className="weather-item" key={weatherItem.id_stacji}>
               <h2>{weatherItem.stacja}</h2>
+              <p>Temperatura: {weatherItem.temperatura} st. C</p>
+              <p>Ciśnienie: {weatherItem.cisnienie} hPa</p>
             </div>
           );
         })}

@@ -15,4 +15,15 @@
 @layer base {
 }
 @layer components {
+  .weather-container {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 0 30px;
+  }
+
+  .weather-container .weather-item {
+    width: 25%;
+    border: 1px solid var(--foreground);
+  }
 }
