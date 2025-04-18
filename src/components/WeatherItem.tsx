@@ -1,3 +1,4 @@
+import React from "react";
 interface WeatherItemProps {
   id_stacji: string;
   stacja: string;
@@ -5,7 +6,7 @@ interface WeatherItemProps {
   cisnienie: string;
 }
 
-const WeatherItem = ({
+const WeatherItemComponent = ({
   id_stacji,
   stacja,
   temperatura,
@@ -19,5 +20,8 @@ const WeatherItem = ({
     </div>
   );
 };
+
+//optymalizacja komponentu funkcyjnego, żeby się renderował tylko wtedy gdy zmienią się wartości (propsy)
+const WeatherItem = React.memo<WeatherItemProps>(WeatherItemComponent);
 
 export default WeatherItem;
