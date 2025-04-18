@@ -13,7 +13,7 @@ const Weather = () => {
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearchTerm(searchWeatherTerm);
-    }, 100); //tzw debounce - czekamy 100ms po ostatnim wpisanym znaku
+    }, 50); //tzw debounce - czekamy 50ms po ostatnim wpisanym znaku
 
     return () => {
       clearTimeout(handler); //czyścimy poprzedni timeout jeśli użytkownik jeszcze pisze
