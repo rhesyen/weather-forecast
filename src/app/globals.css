@@ -27,3 +27,14 @@
     border: 1px solid var(--foreground);
   }
 }
+
+@media (max-width: 992px) {
+  .weather-container .weather-item {
+    width: 50%;
+  }
+}
+@media (max-width: 576px) {
+  .weather-container .weather-item {
+    width: 100%;
+  }
+}
