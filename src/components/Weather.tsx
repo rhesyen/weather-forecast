@@ -1,12 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import WeatherItem from "../components/WeatherItem";
 import SearchWeather from "../components/SearchWeather";
 
 const Weather = () => {
   const [weatherData, setWeatherData] = useState([]);
+  const [searchWeatherTerm, setSearchWeatherTerm] = useState("");
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearchTerm(searchWeatherTerm);
+    }, 100); //tzw debounce - czekamy 100ms po ostatnim wpisanym znaku
+
+    return () => {
+      clearTimeout(handler); //czyścimy poprzedni timeout jeśli użytkownik jeszcze pisze
+    };
+  }, [searchWeatherTerm]);
 
   async function fetchData() {
     try {
@@ -21,16 +33,28 @@ const Weather = () => {
 
   useEffect(() => {
     fetchData();
+
+    const interval = setInterval(() => {
+      fetchData();
+    }, 6000); //fetch co 60 sekund
+    return () => clearInterval(interval); //czyszczenie interval po odmontowaniu
   }, []); //pusta tablica zależności, useEffect wywoła się tylko raz (po załadowaniu komponentu)
 
-  console.log(weatherData);
+  const filteredData = useMemo(() => {
+    return weatherData.filter((item: any) =>
+      item.stacja.toLowerCase().includes(searchWeatherTerm.toLowerCase()),
+    );
+  }, [weatherData, searchWeatherTerm]); //filtrowanie tylko po nazwie stacji
 
   return (
     <div className="weather">
-      <SearchWeather />
+      <SearchWeather
+        value={debouncedSearchTerm}
+        onChange={(e) => setSearchWeatherTerm(e.target.value)}
+      />
       <div className="weather-container">
-        {weatherData.map((weatherItem: any) => {
-          console.log("Weather Data:", weatherData);
+        {filteredData.map((weatherItem: any) => {
+          //console.log("Weather Data:", weatherData);
           return (
             <WeatherItem
               key={weatherItem.id_stacji} //kluczowanie key odbywa się tam gdzie mapowanie
