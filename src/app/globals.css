@@ -13,6 +13,9 @@
 }
 
 @layer base {
+  input {
+    background-color: transparent;
+  }
 }
 @layer components {
   .weather-container {
